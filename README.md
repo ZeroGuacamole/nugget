@@ -43,3 +43,37 @@ Tool-Name is structured into several key components to ensure modularity and eas
 
 ### Extensions
 - **Plugin System**: Allows for extending the functionality of the tool through plugins or additional modules.
+
+## Folder Structure
+
+Here is the folder structure of our project, which helps in navigating and understanding where specific parts of the code reside:
+
+```plaintext
+/tool-name/
+|-- /src/
+|   |-- /core/                  # Core functionality
+|   |   |-- /eventCapture/      # Logic to capture browser events
+|   |   |-- /selectorGenerator/ # Logic to generate selectors
+|   |   `-- /codeGenerator/     # Logic to generate test code
+|
+|   |-- /ui/                    # User interface components
+|   |   |-- /components/        # Reusable UI components
+|   |   |-- /pages/             # Specific pages or views
+|   |   `-- /hooks/             # React hooks for state and logic reuse
+|
+|   |-- /api/                   # For backend communication (if applicable)
+|
+|   |-- /utils/                 # Utility functions and helpers
+|
+|   |-- /config/                # Configuration files
+|
+|   `-- /tests/                 # Test files
+|       |-- /unit/              # Unit tests
+|       |-- /integration/       # Integration tests
+|       `-- /e2e/               # End-to-end tests
+|
+|-- /public/                   # Public assets and static files
+|-- /scripts/                  # Build and setup scripts
+|-- /docs/                     # Documentation files
+|-- /extensions/               # Additional plugins or extensions
+```
