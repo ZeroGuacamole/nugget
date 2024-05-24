@@ -1,12 +1,10 @@
-import useEventCapture from './hooks/useEventCapture';
 import './App.css';
+import EventDisplayModal from './components/EventDisplayModal';
 
 const App = () => {
-  const { testScript } = useEventCapture();
-
   return (
     <div>
-      <pre>{testScript}</pre>
+      <EventDisplayModal />
       <div>
         <h1>Test Interaction Components</h1>
         <button
