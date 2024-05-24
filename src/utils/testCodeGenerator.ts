@@ -1,24 +1,26 @@
+import { mapSelectorToTestingLibraryQuery } from './selectorToTestingLibraryMapper';
+
 interface EventData {
   type: string;
   selector: string;
-  value?: string; // for inputs
+  value?: string;
 }
 
 export const generateTestCode = (events: EventData[]): string => {
-  const imports = `import { render, fireEvent } from '@testing-library/react';\nimport MyComponent from './MyComponent';\n\n`;
-  let tests = "test('should handle user interaction correctly', () => {\n";
-  tests += `  const { getByText, getByLabelText, getByRole } = render(<MyComponent />);\n`;
+  const imports = `import { render, fireEvent, screen } from '@testing-library/react';\nimport MyComponent from './MyComponent';\n\n`;
+  let tests = "test('should simulate user interactions correctly', () => {\n";
+  tests += `  render(<MyComponent />);\n`;
 
   events.forEach((event) => {
+    const queryFunction = mapSelectorToTestingLibraryQuery(event.selector);
+    console.log({ queryFunction });
     if (event.type === 'click') {
-      tests += `  fireEvent.click(getByText('${event.selector}'));\n`;
+      tests += `  fireEvent.click(screen.${queryFunction});\n`;
     } else if (event.type === 'change') {
-      tests += `  fireEvent.change(getByLabelText('${event.selector}'), { target: { value: '${event.value}' } });\n`;
+      tests += `  fireEvent.change(screen.${queryFunction}, { target: { value: '${event.value}' } });\n`;
     }
-    // Add more conditions for other types of events as necessary
   });
 
-  tests += `  // Add assertions here\n`;
   tests += '});\n';
 
   return imports + tests;

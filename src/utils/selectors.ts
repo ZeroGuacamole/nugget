@@ -1,23 +1,22 @@
 export const generateSelector = (element: Element): string => {
-  if (element.id) {
-    return `#${element.id}`;
-  } else if (element instanceof HTMLInputElement && element.name) {
-    return `input[name="${element.name}"]`;
-  } else if (element.textContent) {
-    return `xpath=//*[text()='${element.textContent.trim()}']`;
-  } else {
-    return generatePathSelector(element);
+  const testId = element.getAttribute('data-testid');
+  if (testId) {
+    return `[data-testid="${testId}"]`;
   }
-};
 
-const generatePathSelector = (element: Element): string => {
-  let path = '',
-    currentEl = element;
-  while (currentEl !== document.body && currentEl.parentNode) {
-    const index =
-      Array.from(currentEl.parentNode.children).indexOf(currentEl) + 1;
-    path = `> ${currentEl.tagName}:nth-child(${index})` + path;
-    currentEl = currentEl.parentNode as Element;
+  if (element.hasAttribute('type')) {
+    const typeAttribute = element.getAttribute('type');
+    return `${element.tagName.toLowerCase()}[type="${typeAttribute}"]`;
   }
-  return path.substring(2);
+  if (element.hasAttribute('role')) {
+    const roleAttribute = element.getAttribute('role');
+    return `[role="${roleAttribute}"]`;
+  }
+
+  if (element.className) {
+    const classes = element.className.split(/\s+/).join('.');
+    return `.${classes}`;
+  }
+
+  return element.tagName.toLowerCase();
 };

@@ -9,7 +9,7 @@ const useEventCapture = () => {
       try {
         const handler = EventHandlerFactory.getHandler(event);
         const scriptPart = handler.handleEvent(event);
-        setTestScript((prev) => prev + scriptPart);
+        setTestScript(scriptPart);
       } catch (error) {
         console.error((error as Error).message);
       }
