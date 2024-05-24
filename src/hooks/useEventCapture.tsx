@@ -1,12 +1,18 @@
-import { useEffect } from 'react';
-import { generateSelector } from '../utils/selectors';
+import { useEffect, useState } from 'react';
+import { EventHandlerFactory } from '../factories/EventHandlerFactory';
 
 const useEventCapture = () => {
+  const [testScript, setTestScript] = useState('');
+
   useEffect(() => {
     const eventHandler = (event: Event) => {
-      const target = event.target as Element;
-      const selector = generateSelector(target);
-      console.log(`${event.type} event on:`, selector);
+      try {
+        const handler = EventHandlerFactory.getHandler(event);
+        const scriptPart = handler.handleEvent(event);
+        setTestScript((prev) => prev + scriptPart);
+      } catch (error) {
+        console.error((error as Error).message);
+      }
     };
 
     const eventsToCapture = ['click', 'change'];
@@ -21,7 +27,7 @@ const useEventCapture = () => {
     };
   }, []);
 
-  return null;
+  return { testScript };
 };
 
 export default useEventCapture;
