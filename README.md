@@ -1,6 +1,6 @@
-# RecordThisTest
+# Nugget
 
-RecordThisTest is an open-source tool designed to capture user actions in React applications and automatically generate test code using `testing-library/react`. This tool aims to simplify the process of writing tests by automating the generation of test scripts based on actual user interactions.
+Nugget is an open-source tool designed to capture user actions in React applications and automatically generate test code using `testing-library/react`. This tool aims to simplify the process of writing tests by automating the generation of test scripts based on actual user interactions.
 
 ## Requirements and Milestones
 
@@ -23,7 +23,7 @@ RecordThisTest is an open-source tool designed to capture user actions in React 
 
 ## High-Level Architecture
 
-Tool-Name is structured into several key components to ensure modularity and ease of maintenance:
+Nugget is structured into several key components to ensure modularity and ease of maintenance:
 
 ### Core
 - **Event Capture**: Logic to attach event listeners and capture user interactions efficiently.
